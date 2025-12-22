@@ -11,12 +11,12 @@
         <relativePath/>
     </parent>
     <groupId>io.github.ian</groupId>
-    <artifactId>observable-parent</artifactId>
+    <artifactId>observable-console</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>observable-service</module>
+        <module>observable-main</module>
         <module>observable-downstream</module>
     </modules>
 

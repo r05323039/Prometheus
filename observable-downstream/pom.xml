@@ -7,7 +7,7 @@
 
     <parent>
         <groupId>io.github.ian</groupId>
-        <artifactId>observable-parent</artifactId>
+        <artifactId>observable-console</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
