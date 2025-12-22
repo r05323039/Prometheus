@@ -3,3 +3,16 @@ server:
 
 downstream:
   base-url: ${DOWNSTREAM_BASE_URL}
+
+management:
+  observations:
+    key-values:
+      application: ${spring.application.name}
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+spring:
+  application:
+    name: observable-main
