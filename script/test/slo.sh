@@ -1,5 +1,5 @@
 #!/bin/bash
-source "$(dirname "$0")/test-api.sh"
+source "$(dirname "$0")/api.sh"
 
 slo() {
   while true; do
