@@ -1,0 +1,12 @@
+groups:
+  - name: node_status_alerts
+    rules:
+      - alert: NodeDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "服務已離線: {{ $labels.instance }}"
+          description: "服務 {{ $labels.job }} 的實例 {{ $labels.instance }} 已斷線超過 1 分鐘。"
