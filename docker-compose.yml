@@ -20,6 +20,7 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--web.enable-lifecycle'
+      - '--web.external-url=http://localhost:9090' #如果對外ip要改這
     volumes:
       - ./prometheus/:/etc/prometheus/
     ports:
