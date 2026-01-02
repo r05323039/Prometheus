@@ -22,5 +22,5 @@ route:
 # 2. 接收者設定：定義通知管道
 receivers:
   - name: 'web-terminal-log'
-    # 這裡目前是空的，代表告警只會停留在 Alertmanager UI 供查看
-    # 未來我們會在這裡加上 slack_configs 或 email_configs
+    webhook_configs:
+      - url: 'https://webhook.site/86615e49-131b-4ace-85e9-31b60afc2d6a'
