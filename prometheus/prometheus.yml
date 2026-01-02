@@ -15,6 +15,12 @@ scrape_configs:
       - targets: [ 'main:8080' ]
         labels:
           service: 'main'
+  - job_name: 'downstream'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'downstream:8080' ]
+        labels:
+          service: 'downstream'
 
 rule_files:
   - "alerts.yml"
