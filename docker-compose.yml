@@ -6,10 +6,15 @@ services:
     volumes:
       - ./nginx-gateway/conf.d:/etc/nginx/conf.d:ro
     networks: [ web ]
+    depends_on:
+      - prometheus
+      - grafana
+      - main
   main:
     build:
       context: .
       dockerfile: observable-main/Dockerfile
+    networks: [ web ]
     environment:
       - DOWNSTREAM_BASE_URL=http://downstream:8080
 
