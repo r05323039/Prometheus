@@ -47,11 +47,12 @@ services:
     image: prom/alertmanager:v0.26.0
     volumes:
       - ./alertmanager/:/etc/alertmanager/
+    networks: [ web ]
     command:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
-    ports:
-      - "9093:9093"
+      - '--web.route-prefix=/'
+      - '--web.external-url=http://localhost/alertmanager/'
 
 networks:
   web:
