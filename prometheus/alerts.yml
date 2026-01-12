@@ -6,7 +6,17 @@ groups:
         for: 1m
         labels:
           severity: critical
-          team: devops
         annotations:
           summary: "服務已離線: {{ $labels.instance }}"
           description: "服務 {{ $labels.job }} 的實例 {{ $labels.instance }} 已斷線超過 1 分鐘。"
+
+  - name: disk_management
+    rules:
+      - alert: DiskFull
+        expr: node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} < 0.5
+        for: 10s
+        labels:
+          severity: warning
+        annotations:
+          summary: "硬碟已使用 10%"
+          description: "請執行 docker image prune。"
