@@ -7,4 +7,4 @@ PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
 echo "正在根目錄啟動服務: $PROJECT_ROOT"
-docker compose up -d --build --force-recreate
+docker-compose up -d --build --force-recreate
