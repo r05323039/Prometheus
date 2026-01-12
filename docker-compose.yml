@@ -51,6 +51,13 @@ services:
       - '--storage.path=/alertmanager'
       - '--web.route-prefix=/'
       - '--web.external-url=http://${PUBLIC_IP:-localhost}/alertmanager/'
+  node-exporter:
+    image: prom/node-exporter:latest
+    volumes:
+      - /:/host:ro,rslave
+    command:
+      - '--path.rootfs=/host'
+    networks: [ web ]
 
 networks:
   web:
