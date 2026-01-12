@@ -43,12 +43,6 @@ services:
      - GF_SERVER_SERVE_FROM_SUB_PATH=false
     networks: [ web ]
 
-  pushgateway:
-    image: prom/pushgateway:latest
-    ports:
-      - "9091:9091"
-    restart: always
-
   alertmanager:
     image: prom/alertmanager:v0.26.0
     volumes:
