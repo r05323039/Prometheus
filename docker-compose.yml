@@ -6,10 +6,7 @@ services:
     volumes:
       - ./nginx-gateway/conf.d:/etc/nginx/conf.d:ro
     networks: [ web ]
-    depends_on:
-      - prometheus
-      - grafana
-      - main
+    depends_on: [prometheus, grafana, alertmanager, main]
   main:
     build:
       context: .
@@ -22,6 +19,7 @@ services:
     build:
       context: .
       dockerfile: observable-downstream/Dockerfile
+    networks: [ web ]
 
   prometheus:
     image: prom/prometheus:latest
@@ -39,7 +37,7 @@ services:
     image: grafana/grafana:latest
     restart: always
     environment:
-     - GF_SERVER_ROOT_URL=http://localhost/grafana/
+     - GF_SERVER_ROOT_URL=http://${PUBLIC_IP:-localhost}/grafana/
      - GF_SERVER_SERVE_FROM_SUB_PATH=false
     networks: [ web ]
 
@@ -52,7 +50,7 @@ services:
       - '--config.file=/etc/alertmanager/alertmanager.yml'
       - '--storage.path=/alertmanager'
       - '--web.route-prefix=/'
-      - '--web.external-url=http://localhost/alertmanager/'
+      - '--web.external-url=http://${PUBLIC_IP:-localhost}/alertmanager/'
 
 networks:
   web:
