@@ -1,26 +1,19 @@
 global:
-  # 如果告警解決了，等待 5 分鐘後才標記為 "Resolved"
-  resolve_timeout: 5m
-
+  resolve_timeout: 5s   # 如果告警解決了，等待 5 分鐘後才標記為 "Resolved"
 # 1. 路由設定：決定告警的去向
 route:
-  # 根據這些標籤進行分組，例如所有 NodeDown 的告警會被塞進同一個通知
-  group_by: ['alertname', 'instance', 'severity']
-
-  # 在第一筆告警產生後，等待多久才發送（為了集結更多告警）
-  group_wait: 30s
-
-  # 當有新的告警加入已存在的分組，等待多久發送（預設 5m）
-  group_interval: 5m
-
-  # 如果告警一直沒解決，隔多久重複發送一次
-  repeat_interval: 4h
-
-  # 預設的接收者
-  receiver: 'web-terminal-log'
+  group_by: ['alertname', 'instance', 'severity']  # 根據這些標籤進行分組，例如所有 NodeDown 的告警會被塞進同一個通知
+  group_wait: 1s  # 在第一筆告警產生後，等待多久才發送（為了集結更多告警）
+  group_interval: 1s  # 當有新的告警加入已存在的分組，等待多久發送（預設 5m）
+  repeat_interval: 4h  # 如果告警一直沒解決，隔多久重複發送一次
+  receiver: 'gmail-notifications'  # 預設的接收者
 
 # 2. 接收者設定：定義通知管道
 receivers:
-  - name: 'web-terminal-log'
-    webhook_configs:
-      - url: 'https://webhook.site/86615e49-131b-4ace-85e9-31b60afc2d6a'
+  - name: 'gmail-notifications'
+    email_configs:
+      - to: 'YOUR_RECEIVE_EMAIL@gmail.com'
+        from: 'DevOpsTeam <YOUR_SEND_EMAIL@gmail.com>'
+        smarthost: smtp.gmail.com:587
+        auth_username: 'YOUR_SEND_EMAIL@gmail.com'
+        auth_password: 'YOUR_APP_PASSWORD_HERE' # 這裡填入應用程式密碼
